@@ -1,7 +1,7 @@
 import random
 
-def strat(robot,opposingRobot):
-    parts = opposingRobot.getFunctioningParts()
+def strat(robot,opposingPartIds):
+    parts = opposingPartIds.keys()
 
     if len(parts) == 1:
         attackPart = parts[0]

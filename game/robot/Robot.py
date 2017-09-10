@@ -65,6 +65,19 @@ class Robot():
 
         return functioningParts
 
+    def getFunctioningPartIds(self):
+        #always available
+        parts = {'body':self.body.id}
+        if self.wheels.health > 0:
+            parts['wheels'] = self.wheels.id
+
+        functioningAddOns = []
+        for addOn in self.addOns:
+            if addOn.health > 0:
+                functioningAddOns.append(addOn.id)
+        parts['addOns'] = functioningAddOns
+        return parts
+
     def status(self):
         if self.body.health > 0:
             return "Alive"

@@ -25,16 +25,16 @@ class Battle():
             self.robot2.reset()
             if i % 2 == 0:
                 while self.robot1.status() != "Dead" and self.robot2.status() != "Dead":
-                    self.robot1.strategy(self.robot2,self.robot1)
+                    self.robot1.strategy(self.robot1,self.robot2.getFunctioningParts())
                     if self.robot2.status() != "Dead":
-                        self.robot2.strategy(self.robot1,self.robot2)
+                        self.robot2.strategy(self.robot2,self.robot1.getFunctioningParts())
                     else:
                         break
             else:
                 while self.robot1.status() != "Dead" and self.robot2.status() != "Dead":
-                    self.robot2.strategy(self.robot1,self.robot2)
+                    self.robot2.strategy(self.robot2,self.robot1.getFunctioningParts())
                     if self.robot1.status() != "Dead":
-                        self.robot1.strategy(self.robot2,self.robot1)
+                        self.robot1.strategy(self.robot1,self.robot2.getFunctioningParts())
                     else:
                         break
             battleResults.append([self.robot1.status(), self.robot2.status()])
