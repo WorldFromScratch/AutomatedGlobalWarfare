@@ -1,4 +1,4 @@
-from Robot import Robot
+from robot.Robot import Robot
 import random
 
 class Battle():
