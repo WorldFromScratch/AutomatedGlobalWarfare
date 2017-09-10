@@ -1,11 +1,11 @@
 from Arm import Arm
 from Wheels import Wheels
 from Body import Body
-import random
+from importlib import import_module
 
 class Robot():
 
-    def __init__(self, battle, stratNum = 0):
+    def __init__(self, battle, stratName):
         '''
         Robots have arms, wheels, and a body by default. Sensors or add-ons can be appended later and are visible for attack
         '''
@@ -14,28 +14,15 @@ class Robot():
         self.body = Body()
         self.wheels = Wheels()
         self.addOns = []
-        self.stratNum = stratNum
+        self.stratName = stratName
         self.battle = battle
+        p, m = 'robot.' + self.stratName, 'strat'
 
-    def strategy(self,robot):
-
-        if self.stratNum == 0:
-            if self.rightArm.health > 0:
-                self.battle.usePartOnPart(self.rightArm,robot.body)
-            elif self.leftArm.health > 0:
-                self.battle.usePartOnPart(self.leftArm, robot.body)
-        else:
-            parts = robot.getFunctioningParts()
-            if len(parts) == 1:
-                attackPart = parts[0]
-            else:
-                attackPart = parts[random.randint(0,len(parts)-1)]
-            if self.rightArm.health > 0:
-                self.battle.usePartOnPart(self.rightArm,attackPart)
-            elif self.leftArm.health > 0:
-                self.battle.usePartOnPart(self.leftArm, attackPart)
+        mod = import_module(p)
+        self.strategy = getattr(mod, m)
 
     def use(self, part):
+
         part.use()
 
     def wait(self):
@@ -62,3 +49,4 @@ class Robot():
             return "Alive"
         else:
             return "Dead"
+
