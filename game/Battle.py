@@ -7,6 +7,13 @@ class Battle():
     def __init__(self, robot1Strat, robot2Strat):
         self.robot1 = Robot(self, robot1Strat)
         self.robot2 = Robot(self, robot2Strat)
+        self.partsDict = {}
+
+        for robot in [self.robot1,self.robot2]:
+            self.partsDict[robot.body.id] = robot.body
+            self.partsDict[robot.wheels.id] = robot.wheels
+            for addOn in robot.addOns:
+                self.partsDict[addOn.id] = addOn
 
     def toDict(self):
         return {'robots':[self.robot1.toDict(),self.robot2.toDict()]}
@@ -40,10 +47,16 @@ class Battle():
 
         return count
 
+    def callFunctionFromDict(self, commandDict):
+        if commandDict['function'] == 'usePartOnPart':
+            self.usePartOnPart(self.getPartFromId(commandDict['usePart']),self.getPartFromId(commandDict['usedOnPart']))
+
+    def getPartFromId(self,id):
+        return self.partsDict[id]
 
     def usePartOnPart(self, usePart, usedOnPart):
         info = {}
-        info['command'] = {'usePart':usePart.getId(),'usedOnPart':usedOnPart.getId(),'function':usePart.use()}
+        info['command'] = {'usePart':usePart.getId(),'usedOnPart':usedOnPart.getId(),'function':'usePartOnPart'}
         if usePart.use() == "Attack":
             attackChance = float(usePart.attack) / (usePart.attack + usedOnPart.dodge)
             if random.uniform(0, 1) < attackChance:
