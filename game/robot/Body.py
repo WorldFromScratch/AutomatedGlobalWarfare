@@ -1,3 +1,5 @@
+import uuid
+
 class Body():
     def __init__(self):
         '''
@@ -6,6 +8,20 @@ class Body():
         self.health = 100
         self.armor = 700
         self.dodge = 50
+
+        self.startingHealth = 100
+        self.startingArmor = 700
+        self.id = uuid.uuid4().hex
+
+    def getId(self):
+        return self.id
+
+    def toDict(self):
+        return {'id':self.id,'health':self.health,'armor':self.armor,'dodge':self.dodge}
+
+    def reset(self):
+        self.health = self.startingHealth
+        self.armor = self.startingArmor
 
     def equip(self):
         pass

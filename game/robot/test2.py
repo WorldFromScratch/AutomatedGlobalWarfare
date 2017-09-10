@@ -7,7 +7,7 @@ def strat(robot,opposingRobot):
         attackPart = parts[0]
     else:
         attackPart = parts[random.randint(0, len(parts) - 1)]
-    if robot.rightArm.health > 0:
-        robot.battle.usePartOnPart(robot.rightArm, attackPart)
-    elif robot.leftArm.health > 0:
-        robot.battle.usePartOnPart(robot.leftArm, attackPart)
+
+    for addOn in robot.addOns:
+        if addOn.health > 0:
+            robot.battle.usePartOnPart(addOn, attackPart)

@@ -1,7 +1,9 @@
-from Arm import Arm
 from Wheels import Wheels
 from Body import Body
 from importlib import import_module
+from AddOn import Arm
+import uuid
+
 
 class Robot():
 
@@ -9,17 +11,36 @@ class Robot():
         '''
         Robots have arms, wheels, and a body by default. Sensors or add-ons can be appended later and are visible for attack
         '''
-        self.leftArm = Arm()
-        self.rightArm = Arm()
+
         self.body = Body()
         self.wheels = Wheels()
-        self.addOns = []
+        self.addOns = [Arm(),Arm()]
         self.stratName = stratName
         self.battle = battle
         p, m = 'robot.' + self.stratName, 'strat'
 
         mod = import_module(p)
         self.strategy = getattr(mod, m)
+        self.id = uuid.uuid4().hex
+
+    def toDict(self):
+        infoDict = {'id':self.id,'status':self.status(),'body':self.body.toDict(),'wheels':self.wheels.toDict()}
+
+        addOnInfo = []
+        for addOn in self.addOns:
+            addOnInfo.append(addOn.toDict())
+        infoDict['addOns':addOnInfo]
+
+        return infoDict
+
+    def getId(self):
+        return self.id
+
+    def reset(self):
+        self.body.reset()
+        self.wheels.reset()
+        for addOn in self.addOns:
+            addOn.reset()
 
     def use(self, part):
 
@@ -33,7 +54,7 @@ class Robot():
 
     def getFunctioningParts(self):
         #always available
-        parts = [self.leftArm,self.rightArm,self.body,self.wheels]
+        parts = [self.body,self.wheels]
 
         parts.extend(self.addOns)
 
