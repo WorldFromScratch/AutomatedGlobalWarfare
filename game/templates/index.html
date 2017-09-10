@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="utf-8">
+        <title>Automated Global Warfare</title>
+
+        <script src="/static/jquery-3.1.1.min.js"></script>
+        <script src="/static/bootstrap.min.js"></script>
+        <script src="/static/script.js"></script>
+
+        <script src="/static/codemirror.js"></script>
+        <link rel="stylesheet" href="/static/codemirror.css">
+        <script src="/static/python.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="/static/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="/static/style.css">
+
+        <script>
+
+
+        </script>
+    </head>
+
+	<body style=''>
+        <nav class="navbar navbar-default" style="padding: 0px 15px;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/" style="padding:0px;height:60px;padding: 8px;">
+                    <img style="height:100%;width:auto;" src="" />
+                </a>
+            </div>
+
+            <div id="mainNavbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right" style="margin-right:0px;display:block;">
+                    <li><a href="dashboard">Photography</a></li>
+                    <li><a href="accountSettings">Account Settings</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 style="text-align:center;">It's Time For Global Warfare!!!</h1>
+                <br>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="gameContainer">
+
+                </div>
+
+                <div class="codeEditor">
+                    <label>
+                        Robot Name:
+                        <input class="form-control" name="robotName" />
+                    </label>
+                    <div class="btn btn-primary" onclick="player.compileRobot()">Save Robot</div>
+                </div>
+
+
+                <div class="gameLog">
+                    <textarea class="form-control" name="gameLogInput" rows="6" disabled="disabled"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
+
