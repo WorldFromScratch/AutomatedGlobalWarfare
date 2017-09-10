@@ -9,6 +9,7 @@ class AddOn():
         self.armor = 100
         self.attack = 50
         self.accuracy = 50
+        self.dodge = 50
         self.range = 1
         self.startingHealth = 100
         self.startingArmor = 100
@@ -32,16 +33,6 @@ class AddOn():
 
 
 class MeleeAddOn(AddOn):
-    def __init__(self):
-        '''
-        Robots have arms, wheels, and a body by default. Sensors or add-ons can be appended later and are visible for attack
-        '''
-        self.health = 100
-        self.armor = 100
-        self.attack = 50
-        self.accuracy = 50
-        self.dodge = 50
-        self.range = 1
 
     def equip(self):
         pass
@@ -50,16 +41,7 @@ class MeleeAddOn(AddOn):
         pass
 
 class Arm(MeleeAddOn):
-    def __init__(self):
-        '''
-        Robots have arms, wheels, and a body by default. Sensors or add-ons can be appended later and are visible for attack
-        '''
-        self.health = 100
-        self.armor = 100
-        self.attack = 50
-        self.accuracy = 50
-        self.dodge = 50
-        self.range = 1
+
 
     def equip(self):
         pass
